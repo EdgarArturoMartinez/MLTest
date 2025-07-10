@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted</p>
 
-<div>Teachable Machine Image Model</div>
-<button type="button" onclick="init()">Start</button>
-<div id="webcam-container"></div>
-<div id="label-container"></div>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-<script type="text/javascript">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reconocimiento Ayax + Arturo</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+  <style>
+    #webcam-container {
+      width: 320px;
+      height: 240px;
+      margin: 0 auto;
+    }
+    #label-container {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h3 style="text-align:center">Detector</h3>
+  <div id="webcam-container"></div>
+  <div id="label-container"></div>
+  
+  <script type="text/javascript">
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "./my_model/";
+    const URL = "https://teachablemachine.withgoogle.com/models/dg4O-MW0W/";
 
     let model, webcam, labelContainer, maxPredictions;
 
