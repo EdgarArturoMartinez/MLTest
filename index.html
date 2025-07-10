@@ -111,7 +111,8 @@
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
-        }		
+        }
+		document.getElementById("start-btn").disabled = true;
 		startRecognitionHistory();
 		
     }
