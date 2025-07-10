@@ -59,7 +59,7 @@
       predictions.sort((a, b) => b.probability - a.probability);
 
       predictions.forEach((p, i) => {
-        labelContainer.children[i].innerText = ${p.className}: ${(p.probability * 100).toFixed(1)}%;
+        labelContainer.children[i].innerText = `${p.className}: ${(p.probability * 100).toFixed(1)}%`;
       });
 
       const top = predictions[0];
