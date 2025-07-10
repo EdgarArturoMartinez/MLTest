@@ -71,7 +71,7 @@
 <div class="center-container">
 
 	<div style="font-size:1.4rem; font-weight:bold;">Teachable Machine Image Model</div>
-	<button type="button" onclick="init()">Start</button>
+	<button id="start-btn" type="button" onclick="init()">Start</button>
 	<div id="webcam-container"></div>
 	<div id="label-container"></div>
 </div>
@@ -88,6 +88,7 @@
 
     // Load the image model and setup the webcam
     async function init() {
+		document.getElementById("start-btn").disabled = true;
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
