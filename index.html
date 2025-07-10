@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 
+<head>
+  <meta charset="UTF-8">
+  <title>Teachable Machine Image Model</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .center-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
 <body>
- <div>Teachable Machine Image Model</div>
-<button type="button" onclick="init()">Start</button>
-<div id="webcam-container"></div>
-<div id="label-container"></div>
+<div class="center-container">
+
+	<div>Teachable Machine Image Model</div>
+	<button type="button" onclick="init()">Start</button>
+	<div id="webcam-container"></div>
+	<div id="label-container"></div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
