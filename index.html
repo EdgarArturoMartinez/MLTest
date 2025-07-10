@@ -100,7 +100,7 @@
 
         // Convenience function to setup a webcam
         const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(350, 350, flip); // width, height, flip
+        webcam = new tmImage.Webcam(300, 300, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         window.requestAnimationFrame(loop);
@@ -137,7 +137,7 @@
 	let recognitionIntervalId = null;
 
 function startRecognitionHistory() {
-    recognitionIntervalId = setInterval(saveRecognition, 5000);
+    recognitionIntervalId = setInterval(saveRecognition, 2000);
 }
 
 function saveRecognition() {
@@ -146,7 +146,8 @@ function saveRecognition() {
     for (let i = 0; i < maxPredictions; i++) {
         currentRecognition.push(labelContainer.childNodes[i].innerHTML);
     }
-    recognitionHistory.push(currentRecognition.join(", "));
+    const now = new Date().toLocaleString();
+	recognitionHistory.push(`[${now}] ${currentRecognition.join(", ")}`);
     updateRecognitionHistory();
 }
 
