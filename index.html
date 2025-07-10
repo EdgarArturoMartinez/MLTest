@@ -111,6 +111,7 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
+		startRecognitionHistory();
     }
 
     async function loop() {
@@ -129,6 +130,36 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }
+	
+	
+	
+	let recognitionHistory = [];
+	let recognitionIntervalId = null;
+
+function startRecognitionHistory() {
+    recognitionIntervalId = setInterval(saveRecognition, 5000);
+}
+
+function saveRecognition() {
+    if (!labelContainer) return;
+    let currentRecognition = [];
+    for (let i = 0; i < maxPredictions; i++) {
+        currentRecognition.push(labelContainer.childNodes[i].innerHTML);
+    }
+    recognitionHistory.push(currentRecognition.join(", "));
+    updateRecognitionHistory();
+}
+
+function updateRecognitionHistory() {
+    let historyContainer = document.getElementById("recognition-history");
+    if (!historyContainer) {
+        historyContainer = document.createElement("div");
+        historyContainer.id = "recognition-history";
+        labelContainer.parentNode.appendChild(historyContainer);
+    }
+    historyContainer.innerHTML = "<b>Recognition History:</b><br>" + recognitionHistory.map(item => `<div>${item}</div>`).join("");
+}
+	
 </script>
 
 </body>
