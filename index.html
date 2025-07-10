@@ -4,32 +4,73 @@
 <head>
   <meta charset="UTF-8">
   <title>Teachable Machine Image Model</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-	  font-family: "MS Sans Serif", Arial, Helvetica, sans-serif;
-    }
-    body {
-      height: 100vh;
-      margin: 0;
-      padding: 0;	  
-    }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "MS Sans Serif", Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #e0e7ef 0%, #f5f7fa 100%);
+    color: #222;
+    min-height: 100vh;
+  }
+  .center-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+  }
+  .center-container > * {
+    margin: 16px 0;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 32px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 12px;
+  }
+  button:hover {
+    background: #125ea2;
+  }
+  #webcam-container, #label-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  @media (max-width: 600px) {
     .center-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 8px;
     }
-  </style>
+    .center-container > * {
+      max-width: 98vw;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 12px 0;
+    }
+  }
+</style>
 </head>
 
 <body>
 <div class="center-container">
 
-	<div>Teachable Machine Image Model</div>
+	<div style="font-size:1.4rem; font-weight:bold;">Teachable Machine Image Model</div>
 	<button type="button" onclick="init()">Start</button>
 	<div id="webcam-container"></div>
 	<div id="label-container"></div>
