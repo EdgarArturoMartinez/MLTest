@@ -199,6 +199,7 @@ function generateApiKey() {
     // Generate a random API key using crypto API for better randomness
     const array = new Uint8Array(32);
     crypto.getRandomValues(array);
+    // Convert byte array to 64-character hex string
     const apiKey = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
     
     // Display the API key
@@ -212,7 +213,7 @@ function generateApiKey() {
 function copyApiKey(event) {
     const apiKeyInput = document.getElementById('api-key-input');
     apiKeyInput.select();
-    apiKeyInput.setSelectionRange(0, 99999); // For mobile devices
+    apiKeyInput.setSelectionRange(0, apiKeyInput.value.length); // Select entire API key
     
     // Try modern clipboard API first
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -236,6 +237,7 @@ function copyApiKey(event) {
 function fallbackCopy(input, button) {
     try {
         input.select();
+        // Using deprecated execCommand for legacy browser support
         document.execCommand('copy');
         const originalText = button.textContent;
         button.textContent = 'Copied!';
