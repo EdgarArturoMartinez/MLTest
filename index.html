@@ -190,6 +190,12 @@
 
 // API Key Generation
 function generateApiKey() {
+    // Check if crypto API is available
+    if (!window.crypto || !window.crypto.getRandomValues) {
+        alert('Your browser does not support secure random number generation. Please use a modern browser.');
+        return;
+    }
+    
     // Generate a random API key using crypto API for better randomness
     const array = new Uint8Array(32);
     crypto.getRandomValues(array);
@@ -208,18 +214,38 @@ function copyApiKey(event) {
     apiKeyInput.select();
     apiKeyInput.setSelectionRange(0, 99999); // For mobile devices
     
-    // Copy to clipboard
-    navigator.clipboard.writeText(apiKeyInput.value).then(() => {
-        const copyBtn = event.target;
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = 'Copied!';
+    // Try modern clipboard API first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(apiKeyInput.value).then(() => {
+            const copyBtn = event.target;
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            fallbackCopy(apiKeyInput, event.target);
+        });
+    } else {
+        // Fallback for older browsers
+        fallbackCopy(apiKeyInput, event.target);
+    }
+}
+
+function fallbackCopy(input, button) {
+    try {
+        input.select();
+        document.execCommand('copy');
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
         setTimeout(() => {
-            copyBtn.textContent = originalText;
+            button.textContent = originalText;
         }, 2000);
-    }).catch(err => {
-        console.error('Failed to copy:', err);
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
         alert('Failed to copy API key. Please copy manually.');
-    });
+    }
 }
 
 // Load existing API key on page load
